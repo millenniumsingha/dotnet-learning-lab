@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Legacy Migration (Ignored per user request - local only)
+old_projects_migration/
+
+# Workflow (Ignored per user request)
+.workflow/
