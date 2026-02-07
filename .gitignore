@@ -1,0 +1,18 @@
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Legacy Migration (Tracked but ignore contents if needed, initially we want to track it for reference, but ignore typically generated files inside it)
+# actually we want to track old_projects_migration fully until deleted.
