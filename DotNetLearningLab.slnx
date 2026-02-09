@@ -1,5 +1,9 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Chess/Chess.csproj" />
+    <Project Path="src/EightQueens/EightQueens.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EightQueens.Tests/EightQueens.Tests.csproj" />
   </Folder>
 </Solution>
