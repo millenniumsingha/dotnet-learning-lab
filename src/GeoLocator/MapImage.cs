@@ -49,21 +49,14 @@ namespace DotNetLearningLab.GeoLocator
         /// https://developer.here.com/
         /// </remarks>
 
-        private static Uri BuildURI(double lat, double lon, double accuracy)
+        private static Uri BuildURI(double lat, double lon, double accuracy) 
         {
-            #region HERE App ID & App Code
-            string HereApi_AppID = "BpJ4qijas6smWHBJFCXo";
-            string HereApi_AppCode = "6Io4_d8-h9D2WSuinBfhjA";
-            #endregion
-
-            var HereApi_DNS = "image.maps.cit.api.here.com";
-            var HereApi_URL = $"https://{HereApi_DNS}/mia/1.6/mapview";
-            var HereApi_Secrets = $"&app_id={HereApi_AppID}&app_code={HereApi_AppCode}";
-
-            var latlon = $"&lat={lat}&lon={lon}";
-
-            // Use invariant culture for formatting coords in URI
-            return new Uri(HereApi_URL + $"?u={accuracy}" + HereApi_Secrets + latlon);
+            // Replaced deprecated HERE Maps API with placeholder service
+            // This demonstrates network functionality without requiring new API keys
+            string text = $"Lat: {lat:F3}\nLon: {lon:F3}\nAcc: {accuracy:F0}m";
+            string encodedText = Uri.EscapeDataString(text);
+            
+            return new Uri($"https://placehold.co/600x400/png?text={encodedText}");
         }
 
         private static void OpenWithDefaultApp(string filename)
