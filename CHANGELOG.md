@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.2] - 2026-02-13
+
+### Fixed
+- **WeatherTrend:** Resolved startup crash in single-file builds by using `AppContext.BaseDirectory` for reliable path resolution.
+- **WeatherTrend:** Added global exception handler to catch and display startup errors.
+
 ## [v1.1.1] - 2026-02-13
 
 ### Fixed
