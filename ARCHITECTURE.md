@@ -4,6 +4,42 @@
 
 The solution follows a standard .NET 10 structure with Central Package Management (CPM).
 
+```mermaid
+graph TD
+    User([End User])
+
+    subgraph Solution [DotNet Learning Lab]
+        subgraph Apps [Applications - Desktop]
+            WT[WeatherTrend<br/>WPF]
+            MI[MusicalInstrument<br/>WinForms]
+            GL[GeoLocator<br/>WinForms]
+            EQ[EightQueens<br/>Console]
+        end
+
+        subgraph Libs [Core Libraries]
+            Chess[Chess Logic]
+        end
+    end
+    
+    subgraph External [External Dependencies]
+        LC[LiveCharts.Wpf]
+        NA[NAudio]
+        GPS[System.Device - Legacy]
+    end
+
+    %% Dependencies
+    WT -->|Uses| LC
+    MI -->|Uses| NA
+    GL -.->|Migrated From| GPS
+    EQ -->|Uses| Chess
+    
+    %% User Flows
+    User -->|Runs| WT
+    User -->|Runs| MI
+    User -->|Runs| GL
+    User -->|Runs| EQ
+```
+
 ```
 DotNetLearningLab/
 ├── src/

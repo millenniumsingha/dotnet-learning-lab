@@ -5,6 +5,10 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-active-green)
 
+> **Download Demos:** Want to try these apps without installing .NET?  
+> 👉 [**Download the latest playable demos here!**](https://github.com/millenniumsingha/dotnet-learning-lab/releases/latest)
+> *(Look for `WeatherTrend-Demo.zip`, `MusicalInstrument-Demo.zip`, etc.)*
+
 **DotNet Learning Lab** is a unified playground for modern .NET 10 development, consolidating legacy experiments into a clean, structured monorepo. It serves as a reference implementation for migrating Windows desktop apps (WPF, WinForms) and console tools to the latest .NET ecosystem.
 
 ---
