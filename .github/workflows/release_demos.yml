@@ -1,0 +1,57 @@
+name: "Release Demos"
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build ${{ matrix.app }} Demo
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        app: [WeatherTrend, MusicalInstrument, GeoLocator, EightQueens]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Publish Single File
+        run: |
+          dotnet publish src/${{ matrix.app }}/${{ matrix.app }}.csproj `
+            --configuration Release `
+            --runtime win-x64 `
+            --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            --output release/${{ matrix.app }}
+
+      - name: Zip Executable
+        shell: pwsh
+        run: |
+          $source = "release/${{ matrix.app }}/${{ matrix.app }}.exe"
+          $destination = "release/${{ matrix.app }}-Demo.zip"
+          Compress-Archive -Path $source -DestinationPath $destination
+          Write-Host "Created $destination"
+
+      - name: Upload Artifact (Manual/Debug)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-Demo
+          path: release/${{ matrix.app }}-Demo.zip
+
+      - name: Upload Release Asset
+        if: github.event_name == 'release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} "release/${{ matrix.app }}-Demo.zip" --clobber
