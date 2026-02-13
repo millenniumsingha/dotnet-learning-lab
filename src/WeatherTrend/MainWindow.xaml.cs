@@ -12,11 +12,17 @@ namespace DotNetLearningLab.WeatherTrend
 {
     public partial class MainWindow : Window
     {
-        private static string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pond_data", "Environmental_Data_Deep_Moor_2012.txt");
+        // Use AppContext.BaseDirectory for reliable path resolution in .NET Core+
+        private static string filename = Path.Combine(AppContext.BaseDirectory, "pond_data", "Environmental_Data_Deep_Moor_2012.txt");
 
         public MainWindow()
         {
             InitializeComponent();
+
+            if (!File.Exists(filename))
+            {
+                MessageBox.Show($"Data file not found at:\n{filename}\n\nPlease ensure 'pond_data' directory exists next to the executable.", "Missing Data", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
             // Add LineSeries
             var series = new LineSeries()
