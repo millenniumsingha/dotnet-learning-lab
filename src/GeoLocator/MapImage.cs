@@ -21,11 +21,15 @@ namespace DotNetLearningLab.GeoLocator
             
             // Sanitize filename
             filename = filename.Replace("/", "_").Replace(":", "_");
+            
+            // Use Temp path to avoid Access Denied errors
+            string tempPath = Path.GetTempPath();
+            string fullPath = Path.Combine(tempPath, filename);
 
-            Console.WriteLine($"Downloading map to {filename}...");
-            await DownloadMapImageAsync(BuildURI(lat, lon, accuracy), filename);
+            Console.WriteLine($"Downloading map to {fullPath}...");
+            await DownloadMapImageAsync(BuildURI(lat, lon, accuracy), fullPath);
 
-            OpenWithDefaultApp(filename);
+            OpenWithDefaultApp(fullPath);
         }
 
         private static async Task DownloadMapImageAsync(Uri target, string filename)

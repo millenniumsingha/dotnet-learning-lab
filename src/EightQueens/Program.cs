@@ -19,3 +19,6 @@ else
 {
     Console.WriteLine("No solutions found.");
 }
+
+Console.WriteLine("\nPress Enter to exit...");
+Console.ReadLine();

@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="pond_data\**">
+    <Content Include="pond_data\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>
