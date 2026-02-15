@@ -12,8 +12,12 @@ namespace DotNetLearningLab.WeatherTrend
 {
     public partial class MainWindow : Window
     {
-        // Use AppContext.BaseDirectory for reliable path resolution in .NET Core+
-        private static string filename = Path.Combine(AppContext.BaseDirectory, "pond_data", "Environmental_Data_Deep_Moor_2012.txt");
+        // Use Environment.ProcessPath to resolve the actual .exe location on disk
+        // AppContext.BaseDirectory points to the temp extraction folder in single-file builds
+        private static string filename = Path.Combine(
+            Path.GetDirectoryName(Environment.ProcessPath)!,
+            "pond_data",
+            "Environmental_Data_Deep_Moor_2012.txt");
 
         public MainWindow()
         {
