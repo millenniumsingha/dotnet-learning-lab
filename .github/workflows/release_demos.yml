@@ -38,7 +38,7 @@ jobs:
       - name: Zip Executable
         shell: pwsh
         run: |
-          $source = "release/${{ matrix.app }}/${{ matrix.app }}.exe"
+          $source = "release/${{ matrix.app }}/*"
           $destination = "release/${{ matrix.app }}-Demo.zip"
           Compress-Archive -Path $source -DestinationPath $destination
           Write-Host "Created $destination"
