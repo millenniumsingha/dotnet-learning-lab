@@ -83,9 +83,7 @@ namespace DotNetLearningLab.WeatherTrend
             {
                 new Axis
                 {
-                    Labeler = value => new DateTime((long)value).ToString("yyyy-MM:dd HH:mm", System.Globalization.CultureInfo.InvariantCulture),
-                    UnitWidth = TimeSpan.FromHours(1).Ticks, 
-                    MinStep = TimeSpan.FromHours(1).Ticks
+                    Labeler = value => new DateTime((long)value).ToString("yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 }
             };
 
