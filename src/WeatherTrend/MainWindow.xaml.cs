@@ -41,8 +41,8 @@ namespace DotNetLearningLab.WeatherTrend
 
             // Mapping Functions from raw values to doubles for Axis (X & Y)
             var woXY = Mappers.Xy<WeatherObservation>();
-            woXY.X((wo) => wo.TimeStamp.Ticks);
-            woXY.Y((wo) => wo.Barometric_Pressure);
+            woXY.X((wo) => wo.Timestamp.Ticks);
+            woXY.Y((wo) => wo.BarometricPressure);
 
             // Series Collection containing the LineSeries
             MySeriesCollection = new SeriesCollection(woXY)
@@ -55,8 +55,8 @@ namespace DotNetLearningLab.WeatherTrend
 
         private static void LoadData(ChartValues<WeatherObservation> values)
         {
-            var start = DateTime.Parse("2012-01-02 00:00:00");
-            var end = DateTime.Parse("2012-01-02 17:00:00");
+            var start = DateTime.Parse("2012-01-02 00:00:00", System.Globalization.CultureInfo.InvariantCulture);
+            var end = DateTime.Parse("2012-01-02 17:00:00", System.Globalization.CultureInfo.InvariantCulture);
 
             using (var text = new StreamReader(filename))
             {
@@ -70,7 +70,7 @@ namespace DotNetLearningLab.WeatherTrend
 
         public SeriesCollection MySeriesCollection { get; set; }
 
-        public Func<double, string> X_Label_Formatter => (d) => (new DateTime((long)d)).ToString("yyyy-MM:dd HH:mm:ss");
-        public Func<double, string> Y_Label_Formatter => (d) => d.ToString("###.00");
+        public static Func<double, string> XLabelFormatter => (d) => (new DateTime((long)d)).ToString("yyyy-MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        public static Func<double, string> YLabelFormatter => (d) => d.ToString("###.00", System.Globalization.CultureInfo.InvariantCulture);
     }
 }

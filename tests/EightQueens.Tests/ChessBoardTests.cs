@@ -8,7 +8,7 @@ namespace EightQueens.Tests
     public class ChessBoardTests
     {
         [Fact]
-        public void Test_010_EmptyBoardIsSafe()
+        public void Test010EmptyBoardIsSafe()
         {
             var board = new ChessBoard("00000000");
 
@@ -16,7 +16,7 @@ namespace EightQueens.Tests
         }
 
         [Fact]
-        public void Test_011_BoardIsSafe()
+        public void Test011BoardIsSafe()
         {
             var board = new ChessBoard("10000000");
 
@@ -24,7 +24,7 @@ namespace EightQueens.Tests
         }
 
         [Fact]
-        public void Test_012_BoardIsSafe()
+        public void Test012BoardIsSafe()
         {
             var board = new ChessBoard("15863720");
 
@@ -32,7 +32,7 @@ namespace EightQueens.Tests
         }
 
         [Fact]
-        public void Test_019_EachKnownSolutionIsSafe()
+        public void Test019EachKnownSolutionIsSafe()
         {
             var boards = from solution in ChessBoard.Solutions
                          select new ChessBoard(solution);
@@ -42,14 +42,14 @@ namespace EightQueens.Tests
         }
 
         [Fact]
-        public void Test_020_PlaceQueens()
+        public void Test020PlaceQueens()
         {
             // starting from an empty board, can we find one solution
             Assert.True(ChessBoard.PlaceQueens());
         }
 
         [Fact]
-        public void Test_030_PlaceQueens()
+        public void Test030PlaceQueens()
         {
             // starting from an empty board, can we find all solutions
             var solutions = new List<ChessBoard>(92);

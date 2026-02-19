@@ -4,7 +4,7 @@ using Windows.Devices.Geolocation;
 
 namespace DotNetLearningLab.GeoLocator
 {
-    class Program
+    sealed class Program
     {
         static async Task Main(string[] args)
         {

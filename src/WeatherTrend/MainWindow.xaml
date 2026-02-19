@@ -10,10 +10,10 @@
     <Grid>
         <lvc:CartesianChart Series="{Binding MySeriesCollection}">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis LabelFormatter="{Binding X_Label_Formatter}"/>
+                <lvc:Axis LabelFormatter="{Binding XLabelFormatter}"/>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis LabelFormatter="{Binding Y_Label_Formatter}"/>
+                <lvc:Axis LabelFormatter="{Binding YLabelFormatter}"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>
