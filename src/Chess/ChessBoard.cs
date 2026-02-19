@@ -105,7 +105,7 @@ namespace DotNetLearningLab.Chess
             if (board.Length != 8)
                 throw new ArgumentOutOfRangeException(nameof(board), board, "Eight values are required, one for each of the eight columns.");
 
-            if (board.Any(n => n < 0 && n > 8))
+            if (board.Any(n => n < 0 || n > 8))
                 throw new ArgumentOutOfRangeException(nameof(board), board, "Valid board positions range from 1 to 8, and zero is accepted to indicate an empty column.");
 
             this.Board = board;
