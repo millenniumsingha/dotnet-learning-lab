@@ -3,11 +3,11 @@
 ## Workflow
 
 1. **Create an Issue:** Describe the change or bug.
-2. **Create a Branch:** specific to the issue (e.g., `feat/my-feature-123`) from `phase/v1`.
-3. **Implement Changes:** Follow coding standards.
-4. **Verify Locally:** Build and test.
-5. **Create Pull Request:** Target `phase/v1`. Ensure CI passes.
-6. **Merge:** Squash or Rebase/Merge as per repository settings.
+6. **Create a Branch:** specific to the issue (e.g., `feat/my-feature-123`) from `phase/v1.2.0`.
+7. **Implement Changes:** Follow coding standards.
+8. **Verify Locally:** Build and test.
+9. **Create Pull Request:** Target `phase/v1.2.0`. Ensure CI passes.
+10. **Merge:** Squash or Rebase/Merge as per repository settings.
 
 ## Documentation
 
