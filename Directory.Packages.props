@@ -4,14 +4,15 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Testing -->
-    <PackageVersion Include="LiveCharts.Wpf" Version="0.9.7" />
-    <PackageVersion Include="LiveCharts" Version="0.9.7" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <!-- UI -->
     <PackageVersion Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />
+    <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.0.0-preview.4.1" />
+    <PackageVersion Include="OpenTK.GLWpfControl" Version="3.3.0" />
+    <PackageVersion Include="OpenTK" Version="3.3.1" />
     <!-- Audio -->
     <PackageVersion Include="NAudio" Version="2.2.1" />
   </ItemGroup>

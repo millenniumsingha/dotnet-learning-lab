@@ -1,16 +1,17 @@
-﻿using LiveCharts;
-using LiveCharts.Configurations;
-using LiveCharts.Wpf;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-
 
 using DotNetLearningLab.WeatherTrend.Models;
 
 namespace DotNetLearningLab.WeatherTrend
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, System.ComponentModel.INotifyPropertyChanged
     {
         // Use Environment.ProcessPath to resolve the actual .exe location on disk
         // AppContext.BaseDirectory points to the temp extraction folder in single-file builds
@@ -19,41 +20,85 @@ namespace DotNetLearningLab.WeatherTrend
             "pond_data",
             "Environmental_Data_Deep_Moor_2012.txt");
 
+        private ISeries[] _series = Array.Empty<ISeries>();
+        private Axis[] _xAxes = Array.Empty<Axis>();
+        private Axis[] _yAxes = Array.Empty<Axis>();
+
+        public ISeries[] Series 
+        { 
+            get => _series; 
+            set { _series = value; OnPropertyChanged(); } 
+        }
+        
+        public Axis[] XAxes 
+        { 
+            get => _xAxes; 
+            set { _xAxes = value; OnPropertyChanged(); } 
+        }
+        
+        public Axis[] YAxes 
+        { 
+            get => _yAxes; 
+            set { _yAxes = value; OnPropertyChanged(); } 
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(name));
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
 
             if (!File.Exists(filename))
             {
                 MessageBox.Show($"Data file not found at:\n{filename}\n\nPlease ensure 'pond_data' directory exists next to the executable.", "Missing Data", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
-            // Add LineSeries
-            var series = new LineSeries()
-            {
-                Title = "Barometric Pressure"
-            };
-
             // ChartValues of WeatherObservation
-            var values = new ChartValues<WeatherObservation>();
+            var values = new ObservableCollection<WeatherObservation>();
             LoadData(values);
-            series.Values = values;
 
-            // Mapping Functions from raw values to doubles for Axis (X & Y)
-            var woXY = Mappers.Xy<WeatherObservation>();
-            woXY.X((wo) => wo.Timestamp.Ticks);
-            woXY.Y((wo) => wo.BarometricPressure);
-
-            // Series Collection containing the LineSeries
-            MySeriesCollection = new SeriesCollection(woXY)
+            // Add LineSeries
+            Series = new ISeries[]
             {
-                series
+                new LineSeries<WeatherObservation>
+                {
+                    Name = "Barometric Pressure",
+                    Values = values,
+                    Mapping = (wo, index) => 
+                    {
+                         return new(wo.Timestamp.Ticks, (double)wo.BarometricPressure);
+                    },
+                    Fill = null,
+                    GeometrySize = 0,
+                    Stroke = new SolidColorPaint(SKColors.DodgerBlue) { StrokeThickness = 2 }
+                }
+            };
+            
+            XAxes = new Axis[]
+            {
+                new Axis
+                {
+                    Labeler = value => new DateTime((long)value).ToString("yyyy-MM:dd HH:mm", System.Globalization.CultureInfo.InvariantCulture),
+                    UnitWidth = TimeSpan.FromHours(1).Ticks, 
+                    MinStep = TimeSpan.FromHours(1).Ticks
+                }
             };
 
-            DataContext = this; // for databinding
+            YAxes = new Axis[]
+            {
+                new Axis
+                {
+                    Labeler = value => value.ToString("###.00", System.Globalization.CultureInfo.InvariantCulture)
+                }
+            };
         }
 
-        private static void LoadData(ChartValues<WeatherObservation> values)
+        private static void LoadData(ObservableCollection<WeatherObservation> values)
         {
             var start = DateTime.Parse("2012-01-02 00:00:00", System.Globalization.CultureInfo.InvariantCulture);
             var end = DateTime.Parse("2012-01-02 17:00:00", System.Globalization.CultureInfo.InvariantCulture);
@@ -64,13 +109,11 @@ namespace DotNetLearningLab.WeatherTrend
 
                 var woValues = WeatherData.ReadRange(text, start, end);
 
-                values.AddRange(woValues);
+                foreach(var wo in woValues)
+                {
+                    values.Add(wo);
+                }
             }
         }
-
-        public SeriesCollection MySeriesCollection { get; set; }
-
-        public static Func<double, string> XLabelFormatter => (d) => (new DateTime((long)d)).ToString("yyyy-MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-        public static Func<double, string> YLabelFormatter => (d) => d.ToString("###.00", System.Globalization.CultureInfo.InvariantCulture);
     }
 }
