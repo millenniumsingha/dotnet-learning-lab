@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿// #nullable disable removed
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,17 +13,17 @@ namespace DotNetLearningLab.WeatherTrend.Models
             TextReader text,
             DateTime? start = null,
             DateTime? end = null,
-            Action<string> errorHandler = null)
+            Action<string>? errorHandler = null)
         {
             return
                 WeatherData.ReadAll(text, errorHandler)
-                .SkipWhile((wo) => wo.TimeStamp < (start ?? DateTime.MinValue))
-                .TakeWhile((wo) => wo.TimeStamp <= (end ?? DateTime.MaxValue));
+                .SkipWhile((wo) => wo.Timestamp < (start ?? DateTime.MinValue))
+                .TakeWhile((wo) => wo.Timestamp <= (end ?? DateTime.MaxValue));
         }
 
-        public static IEnumerable<WeatherObservation> ReadAll(TextReader text, Action<string> errorHandler = null)
+        public static IEnumerable<WeatherObservation> ReadAll(TextReader text, Action<string>? errorHandler = null)
         {
-            string line = null;
+            string? line = null;
 
             while ((line = text.ReadLine()) != null)
             {

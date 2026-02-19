@@ -12,7 +12,7 @@
 ## Documentation
 
 - See [ARCHITECTURE.md](ARCHITECTURE.md) for solution structure.
-- See [impl_plan.md](.gemini/antigravity/brain/c8fd0eb8-d5a7-494e-a947-5e81f6775bc7/implementation_plan.md) if available for roadmap.
+- See the project's [GitHub Issues](https://github.com/millenniumsingha/dotnet-learning-lab/issues) for the roadmap.
 
 ## Style Guide
 
