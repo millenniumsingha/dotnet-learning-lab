@@ -59,5 +59,20 @@ namespace EightQueens.Tests
             // confirm all found solutions are known
             Assert.True(solutions.All(board => ChessBoard.Solutions.Contains(board.ToString())));
         }
+        [Fact]
+        public void Test031InvalidBoardValuesThrowsException()
+        {
+            // Board with values outside 0-8 range should throw
+            var invalidBoard = new int[] { 9, -1, 0, 0, 0, 0, 0, 0 };
+            
+            // This relies on the private constructor validation which is called by the public string constructor
+            // However, the int[] constructor is private. Let's use reflection or modify the test slightly if needed.
+            // Wait, the public string constructor calls: public ChessBoard(string board) : this(board.Select(c => c - '0').ToArray()) { }
+            // So if we pass "9" in a string, '9' - '0' = 9. So passing "9..." string should trigger it.
+            
+            // '9' is valid char '9', '9'-'0'=9. ':' is char 58, 58-48=10. '/' is 47, 47-48=-1.
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => new ChessBoard("90000000"));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => new ChessBoard("/0000000")); // '/' is char before '0', so -1 value
+        }
     }
 }
