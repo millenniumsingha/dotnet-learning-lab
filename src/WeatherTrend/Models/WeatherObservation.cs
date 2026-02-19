@@ -5,8 +5,8 @@ namespace DotNetLearningLab.WeatherTrend.Models
 {
     public struct WeatherObservation
     {
-        public DateTime TimeStamp;
-        public float Barometric_Pressure;
+        public DateTime Timestamp { get; set; }
+        public float BarometricPressure { get; set; }
 
         public static WeatherObservation Parse(string text)
         {
@@ -14,13 +14,13 @@ namespace DotNetLearningLab.WeatherTrend.Models
 
             Debug.Assert(data.Length == 8);
 
-            var timestamp = DateTime.Parse(data[(int)WeatherObservationMetrics.Date_Time].Replace("_", "-"));
-            var pressure = float.Parse(data[(int)WeatherObservationMetrics.Barometric_Pressure]);
+            var timestamp = DateTime.Parse(data[(int)WeatherObservationMetrics.DateTime].Replace("_", "-"), System.Globalization.CultureInfo.InvariantCulture);
+            var pressure = float.Parse(data[(int)WeatherObservationMetrics.BarometricPressure], System.Globalization.CultureInfo.InvariantCulture);
 
             return new WeatherObservation()
             {
-                TimeStamp = timestamp,
-                Barometric_Pressure = pressure
+                Timestamp = timestamp,
+                BarometricPressure = pressure
             };
         }
 
@@ -28,8 +28,8 @@ namespace DotNetLearningLab.WeatherTrend.Models
         {
             wo = new WeatherObservation()
             {
-                TimeStamp = DateTime.MinValue,
-                Barometric_Pressure = float.NaN
+                Timestamp = DateTime.MinValue,
+                BarometricPressure = float.NaN
             };
 
             var data = text.Split('\t');
@@ -37,16 +37,16 @@ namespace DotNetLearningLab.WeatherTrend.Models
             if (data.Length != 8)
                 return false;
 
-            if (!DateTime.TryParse(data[(int)WeatherObservationMetrics.Date_Time].Replace("_", "-"), out DateTime timeStamp))
+            if (!DateTime.TryParse(data[(int)WeatherObservationMetrics.DateTime].Replace("_", "-"), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime timeStamp))
                 return false;
 
-            if (!float.TryParse(data[(int)WeatherObservationMetrics.Barometric_Pressure], out float pressure))
+            if (!float.TryParse(data[(int)WeatherObservationMetrics.BarometricPressure], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float pressure))
                 return false;
 
             wo = new WeatherObservation()
             {
-                TimeStamp = timeStamp,
-                Barometric_Pressure = pressure
+                Timestamp = timeStamp,
+                BarometricPressure = pressure
             };
             return true;
         }

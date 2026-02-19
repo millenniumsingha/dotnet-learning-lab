@@ -7,7 +7,7 @@ using Windows.Devices.Geolocation;
 
 namespace DotNetLearningLab.GeoLocator
 {
-    class MapImage
+    sealed class MapImage
     {
         private static readonly HttpClient _httpClient = new HttpClient();
 
@@ -17,7 +17,7 @@ namespace DotNetLearningLab.GeoLocator
             var lon = coordinate.Point.Position.Longitude;
             var accuracy = coordinate.Accuracy;
 
-            string filename = $"{lat:00.000},{lon:00.000},{accuracy:0000}m.jpg";
+            string filename = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:00.000},{1:00.000},{2:0000}m.jpg", lat, lon, accuracy);
             
             // Sanitize filename
             filename = filename.Replace("/", "_").Replace(":", "_");
@@ -57,7 +57,7 @@ namespace DotNetLearningLab.GeoLocator
         {
             // Replaced deprecated HERE Maps API with placeholder service
             // This demonstrates network functionality without requiring new API keys
-            string text = $"Lat: {lat:F3}\nLon: {lon:F3}\nAcc: {accuracy:F0}m";
+            string text = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Lat: {0:F3}\nLon: {1:F3}\nAcc: {2:F0}m", lat, lon, accuracy);
             string encodedText = Uri.EscapeDataString(text);
             
             return new Uri($"https://placehold.co/600x400/png?text={encodedText}");

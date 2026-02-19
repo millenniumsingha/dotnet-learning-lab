@@ -44,7 +44,7 @@ namespace MusicalInstrument
         }
 
         private Point cursorPoritionOnMouseDown;
-        private bool ButtonIsDown = false;
+        private bool ButtonIsDown;
         private void TheMouseDown(object sender, MouseEventArgs e)
         {
             try
