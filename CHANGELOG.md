@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.2.0] - 2026-02-19
+
+### Added
+- **Refactor:** Modernized `ChessBoard.cs` with file-scoped namespaces, XML documentation, and collection expressions.
+
+### Changed
+- **WeatherTrend:** Migrated from legacy `LiveCharts` (v0.9) to `LiveCharts2` (v2.0.0-rc4.5) for improved performance and modern API usage.
+- **Build:** Enforced strict code style and analysis (`<AnalysisLevel>latest-recommended</AnalysisLevel>`) in `Directory.Build.props`.
+
+### Fixed
+- **Chess:** Corrected validation logic in `ChessBoard.cs` to properly detect invalid board configurations (#52).
+
 ## [v1.1.4] - 2026-02-15
 
 ### Fixed

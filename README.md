@@ -24,11 +24,11 @@
 
 | Project | Type | Description | State |
 |:---|:---|:---|:---|
-| **[Chess](src/Chess)** | Library | Core chess logic and move validation. | ✅ v1.0 |
-| **[EightQueens](src/EightQueens)** | Console | Recursive backtracking solver for the 8-Queens problem. | ✅ v1.0 |
-| **[GeoLocator](src/GeoLocator)** | WinForms | GPS coords via `Windows.Devices.Geolocation` & HERE Maps. | ✅ v1.0 |
-| **[MusicalInstrument](src/MusicalInstrument)** | WinForms | Audio synthesis using `NAudio` sine wave generator. | ✅ v1.0 |
-| **[WeatherTrend](src/WeatherTrend)** | WPF | Historical temp analysis using `LiveCharts` visualization. | ✅ v1.0 |
+| **[Chess](src/Chess)** | Library | Core chess logic and move validation. | ✅ v1.2 |
+| **[EightQueens](src/EightQueens)** | Console | Recursive backtracking solver for the 8-Queens problem. | ✅ v1.2 |
+| **[GeoLocator](src/GeoLocator)** | WinForms | GPS coords via `Windows.Devices.Geolocation` & HERE Maps. | ✅ v1.1 |
+| **[MusicalInstrument](src/MusicalInstrument)** | WinForms | Audio synthesis using `NAudio` sine wave generator. | ✅ v1.1 |
+| **[WeatherTrend](src/WeatherTrend)** | WPF | Historical temp analysis using `LiveCharts2` visualization. | ✅ v1.2 |
 
 ---
 
